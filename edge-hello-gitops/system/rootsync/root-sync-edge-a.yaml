@@ -1,0 +1,12 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RootSync
+metadata:
+  name: root-sync
+  namespace: config-management-system
+spec:
+  sourceType: git
+  git:
+    repo: https://github.com/YOUR_GITHUB_USERNAME/edge-hello-gitops.git  # <-- replace with your repo URL
+    branch: main
+    dir: clusters/edge-a
+    auth: none  # for private repos, use token/ssh and set secretRef
