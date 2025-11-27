@@ -19,9 +19,10 @@ upstreamLock:
     ref: main
     commit: df004221eba44296ea2b479c90e25f3b8b499d5a
 info:
-  description: example cucp blueprint package
   readinessGates:
+  - conditionType: config.injection.WorkloadCluster.workload-cluster
   - conditionType: nephio.org.Specializer.specialize
+  description: example cucp blueprint package
 pipeline:
   mutators:
   - image: gcr.io/kpt-fn/apply-replacements:v0.1.1
@@ -37,16 +38,20 @@ pipeline:
   - image: docker.io/nephio/nfdeploy-fn:latest
 status:
   conditions:
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+  - type: config.injection.WorkloadCluster.workload-cluster
+    status: "False"
+    message: no in-cluster resources of type infra.nephio.org/v1alpha1.WorkloadCluster
+    reason: NoResourceSelected
+  - type: nephio.org.Specializer.specialize
+    status: "False"
+    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
     reason: Failed
+  - type: req.nephio.org/v1alpha1.Interface.e1
     status: "False"
-    type: nephio.org.Specializer.specialize
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+  - type: req.nephio.org/v1alpha1.Interface.f1c
     status: "False"
-    type: req.nephio.org/v1alpha1.Interface.e1
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
+  - type: req.nephio.org/v1alpha1.Interface.n2
     status: "False"
-    type: req.nephio.org/v1alpha1.Interface.f1c
-  - message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
-    status: "False"
-    type: req.nephio.org/v1alpha1.Interface.n2
+    message: 'spec invalid: mandatory field ClusterName is missing from WorkloadCluster'
