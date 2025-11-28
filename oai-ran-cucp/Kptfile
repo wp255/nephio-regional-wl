@@ -40,7 +40,7 @@ status:
   conditions:
   - type: config.injection.WorkloadCluster.workload-cluster
     status: "False"
-    message: no in-cluster resources of type infra.nephio.org/v1alpha1.WorkloadCluster
+    message: field "spec" not found in resource "regional"
     reason: NoResourceSelected
   - type: nephio.org.Specializer.specialize
     status: "False"
